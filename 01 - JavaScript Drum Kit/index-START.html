@@ -59,6 +59,27 @@
 
 <script>
 
+document.addEventListener('keydown', function(e) {
+  var drumSound = document.querySelector("audio[data-key='" + e.which + "']");
+  if(drumSound) {
+    drumSound.pause();
+    drumSound.load();
+    drumSound.play();
+
+    var keyElem = document.querySelector(".key[data-key='" + e.which + "']");
+    tempClassName = keyElem.className;
+    keyElem.className += ' playing';
+  }
+});
+
+document.addEventListener('keyup', function(e) {
+  var keyElem = document.querySelector(".key[data-key='" + e.which + "']");
+  if(keyElem) {
+    keyElem.className = tempClassName;
+  }
+
+});
+
 </script>
 
 
