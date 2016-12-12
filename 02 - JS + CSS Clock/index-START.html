@@ -61,11 +61,35 @@
       background:black;
       position: absolute;
       top:50%;
+      transform-origin: 100%;
+      transform: rotate(90deg);
     }
 
   </style>
 
   <script>
+
+    function update(hand, timeComponent, stepInDegree) {
+      hand.style.transform = `rotate(${timeComponent * stepInDegree + HANDOFFSET}deg)`;
+    }
+
+    function updateClock() {
+      var now = new Date();
+      update(SECONDHAND, now.getSeconds(), SECONDINC);
+      update(MINHAND, now.getMinutes(), MININC);
+      update(HOURHAND, now.getHours(), HOURINC);
+    }
+
+    const SECONDINC = 6;
+    const MININC = 6;
+    const HOURINC = 30;
+    const HANDOFFSET = 90;
+    const SECONDHAND = document.querySelector('.second-hand');
+    const MINHAND = document.querySelector('.min-hand');
+    const HOURHAND = document.querySelector('.hour-hand');
+
+    updateClock();
+    setInterval(updateClock, 1000);
 
 
   </script>
